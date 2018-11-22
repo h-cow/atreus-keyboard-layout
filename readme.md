@@ -1,3 +1,24 @@
+# MouseZero Config
+Keyboard is using the avrdude bootloader. The PCB is backwards so you need to enable `PCBDOWN=yes` but not that the 2 middle keys are still fliped in the config. I found that I was not able to update my Atreus on my Mac or Ubuntu machines it only worked on the Raspberry Pi.
+
+```bash
+make PCBDOWN=yes atreus:mousezero:avrdude
+```
+
+## Edit config
+Edit the key mapping in `keyboards/atreus/keymaps/mousezero/keymap.c`
+Key list can be found at [click here](https://docs.qmk.fm/#/feature_advanced_keycodes)
+Features can be found at [click here](https://docs.qmk.fm/#/features)
+Starter Guide can be found here [click here](https://docs.qmk.fm/#/newbs_getting_started)
+Info on flashing the Atreus [click here](http://atreus.technomancy.us/flash)
+
+
+
+
+
+
+
+
 # Quantum Mechanical Keyboard Firmware
 
 [![Current Version](https://img.shields.io/github/tag/qmk/qmk_firmware.svg)](https://github.com/qmk/qmk_firmware/tags)

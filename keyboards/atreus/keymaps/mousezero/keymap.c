@@ -11,16 +11,16 @@
 #define _EM 1
 #define _AR 2
 #define _SP 3
-#define _PR 3
+#define _PR 4
 #define _RS 8
 #define _LW 9
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_QW] = LAYOUT(
-    KC_Q,                 KC_W,    KC_E,    KC_R,    KC_T,                        KC_Y,    KC_U,    KC_I,    KC_O,    KC_P    ,
-    KC_A,                 KC_S,    KC_D,    KC_F,    KC_G,                        KC_H,    KC_J,    KC_K,    KC_L,    LT(_PR, KC_SCLN) ,
-    LT(_AR, KC_Z),        KC_X,    KC_C,    KC_V,    KC_B,                        KC_N,    KC_M,    KC_COMM, KC_DOT,  LT(_SP, KC_SLSH),
-    MT(MOD_HYPR, KC_ESC), KC_TAB, KC_LALT,  KC_LSFT, KC_LCTL,   KC_BSPC, KC_LGUI, KC_SPC,  MO(_RS), KC_MINS, KC_QUOT, MT(MOD_MEH, KC_ENT)
+    KC_Q,                 KC_W,    KC_E,    KC_R,    KC_T,                                       KC_Y,    KC_U,    KC_I,    KC_O,    KC_P    ,
+    KC_A,                 KC_S,    KC_D,    KC_F,    KC_G,                                       KC_H,    KC_J,    KC_K,    KC_L,    LT(_PR, KC_SCLN) ,
+    KC_Z,        KC_X,    KC_C,    KC_V,    KC_B,                                       KC_N,    KC_M,    KC_COMM, KC_DOT,  LT(_SP, KC_SLSH),
+    MT(MOD_HYPR, KC_ESC), KC_TAB,  KC_LALT,  KC_LSFT, MT(MOD_LGUI, KC_BSPC), MO(_SP), MO(_PR), MT(MOD_LCTL, KC_SPC),  MO(_RS), KC_MINS, KC_QUOT, MT(MOD_MEH, KC_ENT)
   ),
 
   [_EM] = LAYOUT( 

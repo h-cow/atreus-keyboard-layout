@@ -8,13 +8,15 @@
 // Layer names don't all need to be of the same length, obviously, and you can also skip them
 // entirely and just use numbers.
 #define _MAIN_MAC 0
-#define _RS 1
-#define _LW 2
-#define _SHORTCUT_SWITCH 3
-#define _CH 4
-#define _DK 5
-#define _WINDOW_MANAGER 6
-#define _VSCODE 7
+#define _MAIN_LINUX 1
+#define _RS 3
+#define _LW 4
+#define _SHORTCUT_SWITCH 5
+#define _CH 6
+#define _DK 7
+#define _WINDOW_MANAGER 8
+#define _VSCODE 9
+#define _KEYBOARD_SETTINGS 10
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_MAIN_MAC] = LAYOUT( /* Qwerty */
@@ -22,6 +24,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                      KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN ,
     KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                      KC_N,    KC_M,    KC_COMM, KC_DOT,  LT(_DK, KC_SLSH) ,
     LT(_WINDOW_MANAGER, KC_ESC), KC_TAB, KC_LGUI,  KC_LSFT, MT(MOD_LGUI, KC_BSPC),      KC_LALT, KC_LCTL,        LT(_SHORTCUT_SWITCH, KC_SPC),  MO(_RS), KC_MINS, KC_QUOT, KC_ENT
+  ),
+
+  [_MAIN_LINUX] = LAYOUT( /* Qwerty */
+    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                      KC_Y,    KC_U,    KC_I,    KC_O,    KC_P    ,
+    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                      KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN ,
+    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                      KC_N,    KC_M,    KC_COMM, KC_DOT,  LT(_DK, KC_SLSH) ,
+    LT(_WINDOW_MANAGER, KC_ESC), KC_TAB, KC_LGUI,  KC_LSFT, MT(MOD_LCTL, KC_BSPC),      KC_LALT, KC_LCTL,        LT(_SHORTCUT_SWITCH, KC_SPC),  MO(_RS), KC_MINS, KC_QUOT, KC_ENT
   ),
 
   /*
@@ -50,7 +59,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_SHORTCUT_SWITCH] = LAYOUT( /* Qwerty */
     KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                      KC_Y,    KC_U,    KC_I,    KC_O,    KC_P    ,
     KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                      KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN ,
-    KC_Z,    KC_X,    TG(_CH),    TG(_VSCODE),    KC_B,                      KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH ,
+    TG(_KEYBOARD_SETTINGS),    KC_X,    TG(_CH),    TG(_VSCODE),    KC_B,                      KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH ,
     TO(_MAIN_MAC), KC_NO, KC_NO,  KC_NO, KC_NO,  KC_NO, KC_LCTL | KC_LALT, KC_NO,  KC_NO, KC_NO, KC_NO, KC_NO
   ),
 
@@ -79,6 +88,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     LGUI(LALT(KC_K)), LGUI(LSFT(KC_F)), KC_TRNS, LGUI(KC_F), LGUI(LCTL(LSFT(KC_F))), LCTL(LSFT(KC_TAB)), KC_TRNS, KC_TRNS, LCTL(KC_TAB), KC_TRNS,
     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, LGUI(LALT(KC_B)), KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
     TO(_MAIN_MAC), KC_TRNS, KC_TRNS, KC_TRNS, KC_LCTL, KC_TRNS, KC_TRNS, KC_TAB, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
+  ),
+
+  [_KEYBOARD_SETTINGS] = LAYOUT(
+    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, DF(_MAIN_LINUX), KC_TRNS,
+    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, DF(_MAIN_MAC), KC_TRNS, KC_TRNS, KC_TRNS,
+    TO(_MAIN_MAC), KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
   )
 };
 

@@ -7,20 +7,21 @@
 // The underscores don't mean anything - you can have a layer called STUFF or any other name.
 // Layer names don't all need to be of the same length, obviously, and you can also skip them
 // entirely and just use numbers.
-#define _QW 0
+#define _MAIN_MAC 0
 #define _RS 1
 #define _LW 2
-#define _MD 3
+#define _SHORTCUT_SWITCH 3
 #define _CH 4
 #define _DK 5
 #define _WINDOW_MANAGER 6
+#define _VSCODE 7
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-  [_QW] = LAYOUT( /* Qwerty */
+  [_MAIN_MAC] = LAYOUT( /* Qwerty */
     KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                      KC_Y,    KC_U,    KC_I,    KC_O,    KC_P    ,
     KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                      KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN ,
     KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                      KC_N,    KC_M,    KC_COMM, KC_DOT,  LT(_DK, KC_SLSH) ,
-    LT(_WINDOW_MANAGER, KC_ESC), KC_TAB, KC_LGUI,  KC_LSFT, MT(MOD_LGUI, KC_BSPC),      KC_LALT, KC_LCTL,        LT(_MD, KC_SPC),  MO(_RS), KC_MINS, KC_QUOT, KC_ENT
+    LT(_WINDOW_MANAGER, KC_ESC), KC_TAB, KC_LGUI,  KC_LSFT, MT(MOD_LGUI, KC_BSPC),      KC_LALT, KC_LCTL,        LT(_SHORTCUT_SWITCH, KC_SPC),  MO(_RS), KC_MINS, KC_QUOT, KC_ENT
   ),
 
   /*
@@ -44,20 +45,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_INS,  KC_HOME, KC_UP,   KC_END,  KC_PGUP,                   KC_UP,   KC_F7,   KC_F8,   KC_F9,   KC_F10  ,
     KC_DELT, KC_LEFT, KC_DOWN, KC_RGHT, KC_DOWN,                   KC_DOWN, KC_F4,   KC_F5,   KC_F6,   KC_F11  ,
     KC_NO,   KC_VOLU, KC_NO,   KC_NO,   RESET,                     KC_NO,   KC_F1,   KC_F2,   KC_F3,   KC_F12  ,
-    KC_NO,   KC_VOLD, KC_LGUI, KC_LSFT, KC_BSPC, KC_LCTL, KC_LALT, KC_SPC,  TO(_QW), KC_PSCR, KC_SLCK, KC_PAUS ),
+    KC_NO,   KC_VOLD, KC_LGUI, KC_LSFT, KC_BSPC, KC_LCTL, KC_LALT, KC_SPC,  TO(_MAIN_MAC), KC_PSCR, KC_SLCK, KC_PAUS ),
 
-  [_MD] = LAYOUT( /* Qwerty */
+  [_SHORTCUT_SWITCH] = LAYOUT( /* Qwerty */
     KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                      KC_Y,    KC_U,    KC_I,    KC_O,    KC_P    ,
     KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                      KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN ,
-    KC_Z,    KC_X,    TG(_CH),    KC_V,    KC_B,                      KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH ,
-    TO(_QW), KC_NO, KC_NO,  KC_NO, KC_NO,  KC_NO, KC_LCTL | KC_LALT, KC_NO,  KC_NO, KC_NO, KC_NO, KC_NO
+    KC_Z,    KC_X,    TG(_CH),    TG(_VSCODE),    KC_B,                      KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH ,
+    TO(_MAIN_MAC), KC_NO, KC_NO,  KC_NO, KC_NO,  KC_NO, KC_LCTL | KC_LALT, KC_NO,  KC_NO, KC_NO, KC_NO, KC_NO
   ),
 
   [_CH] = LAYOUT( /* Qwerty */
     KC_Q,    LGUI(KC_W),    KC_E,    KC_R,    KC_T,                            KC_Y,    LGUI(KC_L),    LGUI(LSFT(KC_N)),    KC_O,    KC_P    ,
     KC_A,    KC_S,    LGUI(LALT(KC_I)),    KC_F,    KC_G,                      LCTL(LSFT(KC_TAB)),    KC_TAB,    LSFT(KC_TAB),    LCTL(KC_TAB),    KC_SCLN ,
     KC_Z,    KC_X,    KC_C,    KC_V,    LGUI(LALT(KC_B)),                      KC_N,    KC_M,    KC_COMM, LGUI(KC_MINS),  LGUI(KC_PLUS) ,
-    TO(_QW), KC_NO, KC_NO,  KC_NO, KC_NO,         KC_NO, KC_NO,              KC_NO,  KC_NO, KC_NO, KC_NO, KC_NO
+    TO(_MAIN_MAC), KC_NO, KC_NO,  KC_NO, KC_NO,         KC_NO, KC_NO,              KC_NO,  KC_NO, KC_NO, KC_NO, KC_NO
   ),
 
   [_DK] = LAYOUT( /* [> RAISE <] */
@@ -70,9 +71,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     HYPR(KC_Q),    LGUI(KC_W),    HYPR(KC_E),    HYPR(KC_R),    HYPR(KC_T),                      HYPR(KC_Y),    HYPR(KC_U),    HYPR(KC_I),    HYPR(KC_O),    HYPR(KC_P    ),
     HYPR(KC_A),    HYPR(KC_S),    HYPR(KC_D),    HYPR(KC_F),    HYPR(KC_G),                      HYPR(KC_H),    HYPR(KC_J),    HYPR(KC_K),    HYPR(KC_L),    HYPR(KC_SCLN ),
     HYPR(KC_Z),    HYPR(KC_X),    HYPR(KC_C),    HYPR(KC_V),    HYPR(KC_B),                      HYPR(KC_N),    HYPR(KC_M),    HYPR(KC_COMM), HYPR(KC_DOT),  HYPR(KC_SLSH),
-    KC_TRNS,       KC_NO,        KC_NO,          KC_NO,         KC_NO,       KC_TAB, KC_LGUI,       KC_NO,  KC_NO, KC_NO, KC_NO, KC_NO
-  )
+    KC_TRNS,       KC_NO,        KC_NO,          KC_NO,         KC_LCTL,       KC_TAB, KC_LGUI,       KC_TAB,  KC_NO, KC_NO, KC_NO, KC_NO
+  ),
 
+  [_VSCODE] = LAYOUT(
+    LGUI(LALT(LSFT(KC_1))), LGUI(LSFT(KC_E)), LGUI(LSFT(KC_E)), LGUI(LALT(KC_F)), LGUI(LCTL(LSFT(KC_R))), KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, LGUI(KC_P),
+    LGUI(LALT(KC_K)), LGUI(LSFT(KC_F)), KC_TRNS, LGUI(KC_F), LGUI(LCTL(LSFT(KC_F))), LCTL(LSFT(KC_TAB)), KC_TRNS, KC_TRNS, LCTL(KC_TAB), KC_TRNS,
+    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, LGUI(LALT(KC_B)), KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+    TO(_MAIN_MAC), KC_TRNS, KC_TRNS, KC_TRNS, KC_LCTL, KC_TRNS, KC_TRNS, KC_TAB, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
+  )
 };
 
 const uint16_t PROGMEM fn_actions[] = {

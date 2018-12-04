@@ -72,9 +72,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_DK] = LAYOUT( /* [> RAISE <] */
     KC_EXLM, LGUI(LSFT(KC_7)),    LGUI(LSFT(KC_8)),   LGUI(LSFT(KC_9)), KC_RCBR,                   KC_PGUP, LGUI(KC_7),    LGUI(KC_8),   LGUI(KC_9), KC_ASTR ,
-    KC_HASH, LGUI(LSFT(KC_4)),    LGUI(LSFT(KC_5)),   LGUI(LSFT(KC_6)), LGUI(LSFT(KC_0)),                    LGUI(KC_0), LGUI(KC_4),    LGUI(KC_5),   LGUI(KC_6), KC_PLUS ,
+    KC_HASH, LGUI(LSFT(KC_4)),    LGUI(LSFT(KC_5)),   LGUI(LSFT(KC_6)), LGUI(LSFT(KC_0)),          KC_TRNS, LGUI(KC_4),    LGUI(KC_5),   LGUI(KC_6), KC_PLUS ,
     KC_LBRC, LGUI(LSFT(KC_1)),    LGUI(LSFT(KC_2)),   LGUI(LSFT(KC_3)), KC_AMPR,                   KC_GRV,  LGUI(KC_1),    LGUI(KC_2),   LGUI(KC_3), KC_BSLS ,
-    TO(_LW), KC_NO,  KC_LGUI, KC_LSFT, KC_BSPC, KC_LCTL, KC_LALT, KC_SPC,  KC_TRNS, KC_DOT, KC_0, KC_EQL  ),
+    TO(_LW), KC_NO,  KC_LGUI, KC_LSFT, KC_BSPC,                                  KC_LCTL, KC_LALT, KC_SPC,  LGUI(KC_0), KC_DOT, KC_0, KC_EQL  ),
 
   [_WINDOW_MANAGER] = LAYOUT( /* Qwerty */
     HYPR(KC_Q),    LGUI(KC_W),    HYPR(KC_E),    HYPR(KC_R),    HYPR(KC_T),                      HYPR(KC_Y),    HYPR(KC_U),    HYPR(KC_I),    HYPR(KC_O),    HYPR(KC_P    ),

@@ -17,19 +17,20 @@
 #define _WINDOW_MANAGER 8
 #define _VSCODE 9
 #define _KEYBOARD_SETTINGS 10
+#define _CHROME 11
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_MAIN_MAC] = LAYOUT( /* Qwerty */
     KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                      KC_Y,    KC_U,    KC_I,    KC_O,    KC_P    ,
     KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                      KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN ,
-    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                      KC_N,    KC_M,    KC_COMM, KC_DOT,  LT(_DK, KC_SLSH) ,
-    LT(_WINDOW_MANAGER, KC_ESC), KC_TAB, KC_LGUI,  KC_LSFT, MT(MOD_LGUI, KC_BSPC),      KC_LALT, KC_LCTL,        LT(_SHORTCUT_SWITCH, KC_SPC),  MO(_RS), KC_MINS, KC_QUOT, KC_ENT
+    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                      KC_N,    KC_M,    KC_COMM, KC_DOT,  LT(_VSCODE, KC_SLSH) ,
+    LT(_CHROME, KC_ESC), KC_TAB, KC_LGUI,  KC_LSFT, MT(MOD_LGUI, KC_BSPC),      KC_LALT, KC_LCTL,        LT(_SHORTCUT_SWITCH, KC_SPC),  MO(_RS), KC_MINS, KC_QUOT, KC_ENT
   ),
 
   [_MAIN_LINUX] = LAYOUT( /* Qwerty */
     KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                      KC_Y,    KC_U,    KC_I,    KC_O,    KC_P    ,
     KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                      KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN ,
-    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                      KC_N,    KC_M,    KC_COMM, KC_DOT,  LT(_DK, KC_SLSH) ,
+    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                      KC_N,    KC_M,    KC_COMM, KC_DOT,  LT(_VSCODE, KC_SLSH) ,
     LT(_WINDOW_MANAGER, KC_ESC), KC_TAB, KC_LGUI,  KC_LSFT, MT(MOD_LCTL, KC_BSPC),      KC_LALT, KC_LCTL,        LT(_SHORTCUT_SWITCH, KC_SPC),  MO(_RS), KC_MINS, KC_QUOT, KC_ENT
   ),
 
@@ -95,6 +96,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, DF(_MAIN_LINUX), KC_TRNS,
     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, DF(_MAIN_MAC), KC_TRNS, KC_TRNS, KC_TRNS,
     TO(_MAIN_MAC), KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
+  ),
+
+  [_CHROME] = LAYOUT(
+    KC_Q,    LGUI(KC_W),    KC_E,    KC_R,    KC_T,                            KC_Y,    LGUI(KC_L),    LGUI(LSFT(KC_N)),    KC_O,    KC_P    ,
+    KC_A,    KC_S,    LGUI(LALT(KC_I)),    KC_F,    KC_G,                      LCTL(LSFT(KC_TAB)),    KC_TAB,    LSFT(KC_TAB),    LCTL(KC_TAB),    KC_SCLN ,
+    KC_Z,    KC_X,    KC_C,    KC_V,    LGUI(LALT(KC_B)),                      KC_N,    KC_M,    KC_COMM, LGUI(KC_MINS),  LGUI(KC_PLUS) ,
+    KC_TRNS, KC_NO, KC_NO,  KC_NO, KC_NO,         KC_NO, KC_NO,              KC_NO,  KC_NO, KC_NO, KC_NO, KC_NO
   )
 };
 

@@ -11,7 +11,9 @@
 #define _MAIN_LINUX 1
 #define _RS 3
 #define _LW 4
+#define _L_CHROME 5
 #define _VSCODE 9
+#define _SHORTCUT_SWITCHER 10
 #define _CHROME 11
 #define _TMUX 12
 
@@ -26,7 +28,8 @@ enum custom_keycodes {
     TMUX_MOVE_RIGHT,
     TMUX_NEXT_WINDOW,
     TMUX_PREVIOUS_WINDOW,
-    TMUX_CLOSE_WINDOW
+    TMUX_CLOSE_WINDOW,
+    _CHROME_LINUX
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -82,14 +85,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                      KC_Y,    KC_U,    KC_I,    KC_O,    KC_P    ,
     KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                      KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN ,
     KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                      KC_N,    KC_M,    KC_COMM, KC_DOT,  LT(_VSCODE, KC_SLSH) ,
-    LT(_CHROME, KC_ESC), KC_TAB, KC_LGUI,  KC_LSFT, MT(MOD_LCTL, KC_BSPC),      KC_LALT, KC_LCTL,    KC_SPC,  MO(_RS), KC_MINS, KC_QUOT, KC_ENT
+    LT(_CHROME_LINUX, KC_ESC), KC_TAB, KC_LGUI,  KC_LSFT, MT(MOD_LCTL, KC_BSPC),      KC_LALT, KC_LCTL,    KC_SPC,  MO(_RS), KC_MINS, KC_QUOT, LT(_TMUX, KC_ENT)
   ),
 
   [_RS] = LAYOUT( /* [> RAISE <] */
     KC_EXLM, KC_AT,   KC_UP,   KC_LCBR, KC_RCBR,                   KC_PGUP, KC_7,    KC_8,   KC_9, KC_ASTR ,
     KC_HASH, KC_LEFT, KC_DOWN, KC_RGHT, KC_DLR,                    KC_PGDN, KC_4,    KC_5,   KC_6, KC_PLUS ,
     KC_LBRC, KC_RBRC, KC_LPRN, KC_RPRN, KC_AMPR,                   KC_GRV,  KC_1,    KC_2,   KC_3, KC_BSLS ,
-    TG(_LW), KC_NO,  KC_LGUI, KC_LSFT, KC_BSPC, KC_LCTL, KC_LALT, KC_SPC,  KC_TRNS, KC_DOT, KC_0, KC_EQL  ),
+    TG(_LW), TG(_SHORTCUT_SWITCHER),  KC_LGUI, KC_LSFT, KC_BSPC, KC_LCTL, KC_LALT, KC_SPC,  KC_TRNS, KC_DOT, KC_0, KC_EQL  ),
 
   [_LW] = LAYOUT( /* [> LOWER <] */
     KC_INS,  KC_HOME, KC_UP,   KC_END,  KC_PGUP,                   KC_UP,   KC_F7,   KC_F8,   KC_F9,   KC_F10  ,
@@ -104,6 +107,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     TO(_MAIN_MAC), KC_TRNS, KC_TRNS, KC_TRNS, KC_LCTL, KC_TRNS, KC_TRNS, KC_TAB, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
   ),
 
+  [_SHORTCUT_SWITCHER] = LAYOUT(
+    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                         KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                         KC_TRNS, KC_TRNS, KC_TRNS, DF(_MAIN_LINUX), KC_TRNS,
+    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                         DF(_MAIN_MAC), KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+    DF(_MAIN_MAC), KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,   KC_TRNS, KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
+  ),
+
   [_CHROME] = LAYOUT(
     KC_Q,    LGUI(KC_W),    KC_E,    KC_R,    KC_NO,                            KC_Y,    LGUI(KC_L),    LGUI(LSFT(KC_N)),    KC_O,    KC_P    ,
     KC_A,    KC_S,    LGUI(LALT(KC_I)),    KC_F,    KC_G,                      LCTL(LSFT(KC_TAB)),    KC_TAB,    LSFT(KC_TAB),    LCTL(KC_TAB),    KC_SCLN ,
@@ -115,6 +125,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_Q,    TMUX_CLOSE_WINDOW,    KC_E,    KC_R,    KC_T,                            TMUX_NEW_TAB,    TMUX_SPLIT_HORIZONTAL,    TMUX_SPLIT_VERTICAL,    TMUX_NEW_TAB,    TMUX_NEXT_WINDOW    ,
     KC_A,    KC_S,    LGUI(LSFT(KC_TAB)),    LGUI(KC_TAB),    KC_G,                      TMUX_MOVE_LEFT,    TMUX_MOVE_DOWN,    TMUX_MOVE_UP,    TMUX_MOVE_RIGHT,    TMUX_PREVIOUS_WINDOW ,
     KC_Z,    KC_X,    KC_C,    KC_V,    KC_NO,                      KC_N,    KC_M,    KC_COMM, KC_NO,  KC_NO ,
+    KC_TRNS, KC_NO, KC_NO,  KC_NO, KC_NO,         KC_NO, KC_NO,              KC_NO,  KC_NO, KC_NO, KC_NO, KC_NO
+  ),
+
+  [_L_CHROME] = LAYOUT(
+    KC_Q,    LCTL(KC_W),    KC_E,    KC_R,    KC_NO,                            KC_Y,    LCTL(KC_L),    LCTL(LSFT(KC_N)),    KC_O,    KC_P    ,
+    KC_A,    KC_S,    LCTL(LALT(KC_I)),    KC_F,    KC_G,                      LCTL(LSFT(KC_TAB)),    KC_TAB,    LSFT(KC_TAB),    LCTL(KC_TAB),    KC_SCLN ,
+    KC_Z,    KC_X,    KC_C,    KC_V,    LCTL(LALT(KC_B)),                      KC_N,    KC_M,    KC_COMM, LCTL(KC_MINS),  LCTL(KC_PLUS) ,
     KC_TRNS, KC_NO, KC_NO,  KC_NO, KC_NO,         KC_NO, KC_NO,              KC_NO,  KC_NO, KC_NO, KC_NO, KC_NO
   )
 };

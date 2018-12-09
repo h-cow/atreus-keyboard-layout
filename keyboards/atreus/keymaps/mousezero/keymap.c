@@ -11,9 +11,9 @@
 #define _MAIN_LINUX 1
 #define _RS 3
 #define _LW 4
-#define _L_CHROME 5
-#define _VSCODE 9
-#define _SHORTCUT_SWITCHER 10
+#define _VSCODE 8
+#define _SHORTCUT_SWITCHER 9
+#define _L_CHROME 10
 #define _CHROME 11
 #define _TMUX 12
 
@@ -29,7 +29,8 @@ enum custom_keycodes {
     TMUX_NEXT_WINDOW,
     TMUX_PREVIOUS_WINDOW,
     TMUX_CLOSE_WINDOW,
-    _CHROME_LINUX
+    LINUX_AS_DEFAULT,
+    MAC_AS_DEFAULT
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -68,6 +69,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       case TMUX_CLOSE_WINDOW:
         SEND_STRING(SS_LCTRL("b")"x""y");
         return false;
+      case LINUX_AS_DEFAULT:
+        set_single_persistent_default_layer(_MAIN_LINUX);
+        return false;
+      case MAC_AS_DEFAULT:
+        set_single_persistent_default_layer(_MAIN_MAC);
+        return false;
     }
   }
   return true;
@@ -85,7 +92,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                      KC_Y,    KC_U,    KC_I,    KC_O,    KC_P    ,
     KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                      KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN ,
     KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                      KC_N,    KC_M,    KC_COMM, KC_DOT,  LT(_VSCODE, KC_SLSH) ,
-    LT(_CHROME_LINUX, KC_ESC), KC_TAB, KC_LGUI,  KC_LSFT, MT(MOD_LCTL, KC_BSPC),      KC_LALT, KC_LCTL,    KC_SPC,  MO(_RS), KC_MINS, KC_QUOT, LT(_TMUX, KC_ENT)
+    KC_ESC, KC_TAB, KC_LGUI,  KC_LSFT, MT(MOD_LCTL, KC_BSPC),      KC_LALT, KC_LCTL,    KC_SPC,  MO(_RS), KC_MINS, KC_QUOT, LT(_TMUX, KC_ENT)
   ),
 
   [_RS] = LAYOUT( /* [> RAISE <] */
@@ -109,8 +116,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_SHORTCUT_SWITCHER] = LAYOUT(
     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                         KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                         KC_TRNS, KC_TRNS, KC_TRNS, DF(_MAIN_LINUX), KC_TRNS,
-    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                         DF(_MAIN_MAC), KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                         KC_TRNS, KC_TRNS, KC_TRNS, LINUX_AS_DEFAULT, KC_TRNS,
+    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                         MAC_AS_DEFAULT, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
     DF(_MAIN_MAC), KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,   KC_TRNS, KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
   ),
 
@@ -129,11 +136,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [_L_CHROME] = LAYOUT(
-    KC_Q,    LCTL(KC_W),    KC_E,    KC_R,    KC_NO,                            KC_Y,    LCTL(KC_L),    LCTL(LSFT(KC_N)),    KC_O,    KC_P    ,
-    KC_A,    KC_S,    LCTL(LALT(KC_I)),    KC_F,    KC_G,                      LCTL(LSFT(KC_TAB)),    KC_TAB,    LSFT(KC_TAB),    LCTL(KC_TAB),    KC_SCLN ,
-    KC_Z,    KC_X,    KC_C,    KC_V,    LCTL(LALT(KC_B)),                      KC_N,    KC_M,    KC_COMM, LCTL(KC_MINS),  LCTL(KC_PLUS) ,
+    KC_Q,    LGUI(KC_W),    KC_E,    KC_R,    KC_NO,                            KC_Y,    LGUI(KC_L),    LGUI(LSFT(KC_N)),    KC_O,    KC_P    ,
+    KC_A,    KC_S,    LGUI(LALT(KC_I)),    KC_F,    KC_G,                      LCTL(LSFT(KC_TAB)),    KC_TAB,    LSFT(KC_TAB),    LCTL(KC_TAB),    KC_SCLN ,
+    KC_Z,    KC_X,    KC_C,    KC_V,    LGUI(LALT(KC_B)),                      KC_N,    KC_M,    KC_COMM, LGUI(KC_MINS),  LGUI(KC_PLUS) ,
     KC_TRNS, KC_NO, KC_NO,  KC_NO, KC_NO,         KC_NO, KC_NO,              KC_NO,  KC_NO, KC_NO, KC_NO, KC_NO
-  )
+  ),
 };
 
 const uint16_t PROGMEM fn_actions[] = {

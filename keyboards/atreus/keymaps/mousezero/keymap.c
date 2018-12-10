@@ -30,7 +30,8 @@ enum custom_keycodes {
     TMUX_PREVIOUS_WINDOW,
     TMUX_CLOSE_WINDOW,
     LINUX_AS_DEFAULT,
-    MAC_AS_DEFAULT
+    MAC_AS_DEFAULT,
+    TMUX_RENAME_TAB
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -68,6 +69,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         return false;
       case TMUX_CLOSE_WINDOW:
         SEND_STRING(SS_LCTRL("b")"x""y");
+        return false;
+      case TMUX_RENAME_TAB:
+        SEND_STRING(SS_LCTRL("b")","SS_LCTRL("u"));
         return false;
       case LINUX_AS_DEFAULT:
         set_single_persistent_default_layer(_MAIN_LINUX);
@@ -129,7 +133,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [_TMUX] = LAYOUT(
-    KC_Q,    TMUX_CLOSE_WINDOW,    KC_E,    KC_R,    KC_T,                            TMUX_NEW_TAB,    TMUX_SPLIT_HORIZONTAL,    TMUX_SPLIT_VERTICAL,    TMUX_NEW_TAB,    TMUX_NEXT_WINDOW    ,
+    KC_Q,    TMUX_CLOSE_WINDOW,    KC_E,    TMUX_RENAME_TAB,    KC_T,                            TMUX_NEW_TAB,    TMUX_SPLIT_HORIZONTAL,    TMUX_SPLIT_VERTICAL,    TMUX_NEW_TAB,    TMUX_NEXT_WINDOW    ,
     KC_A,    KC_S,    LGUI(LSFT(KC_TAB)),    LGUI(KC_TAB),    KC_G,                      TMUX_MOVE_LEFT,    TMUX_MOVE_DOWN,    TMUX_MOVE_UP,    TMUX_MOVE_RIGHT,    TMUX_PREVIOUS_WINDOW ,
     KC_Z,    KC_X,    KC_C,    KC_V,    KC_NO,                      KC_N,    KC_M,    KC_COMM, KC_NO,  KC_NO ,
     KC_TRNS, KC_NO, KC_NO,  KC_NO, KC_NO,         KC_NO, KC_NO,              KC_NO,  KC_NO, KC_NO, KC_NO, KC_NO

@@ -16,6 +16,7 @@
 #define _L_CHROME 10
 #define _CHROME 11
 #define _TMUX 12
+#define _ITERM 13
 
 enum custom_keycodes {
     MY_CUSTOM = SAFE_RANGE,
@@ -125,7 +126,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_SHORTCUT_SWITCHER] = LAYOUT(
     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                         KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                         KC_TRNS, KC_TRNS, KC_TRNS, LINUX_AS_DEFAULT, KC_TRNS,
-    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                         MAC_AS_DEFAULT, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                         KC_TRNS, MAC_AS_DEFAULT, KC_TRNS, KC_TRNS, KC_TRNS,
     DF(_MAIN_MAC), KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,   KC_TRNS, KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
   ),
 
@@ -149,6 +150,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_Z,    KC_X,    KC_C,    KC_V,    LGUI(LALT(KC_B)),                      KC_N,    KC_M,    KC_COMM, LGUI(KC_MINS),  LGUI(KC_PLUS) ,
     KC_TRNS, KC_NO, KC_NO,  KC_NO, KC_NO,         KC_NO, KC_NO,              KC_NO,  KC_NO, KC_NO, KC_NO, KC_NO
   ),
+
+  [_ITERM] = LAYOUT(
+    KC_Q,    TMUX_CLOSE_WINDOW,    KC_E,    TMUX_RENAME_TAB,    KC_T,                            TMUX_NEW_TAB,    TMUX_SPLIT_HORIZONTAL,    TMUX_SPLIT_VERTICAL,    TMUX_NEW_TAB,    TMUX_NEXT_WINDOW    ,
+    KC_A,    TMUX_SCROLL,    LGUI(LSFT(KC_TAB)),    LGUI(KC_TAB),    KC_G,                      TMUX_MOVE_LEFT,    TMUX_MOVE_DOWN,    TMUX_MOVE_UP,    TMUX_MOVE_RIGHT,    TMUX_PREVIOUS_WINDOW ,
+    KC_Z,    KC_X,    KC_C,    KC_V,    KC_NO,                      KC_N,    KC_M,    KC_COMM, KC_NO,  KC_NO ,
+    KC_TRNS, KC_NO, KC_NO,  KC_NO, KC_NO,         KC_NO, KC_NO,              KC_NO,  KC_NO, KC_NO, KC_NO, KC_NO
+  ),
+
 };
 
 const uint16_t PROGMEM fn_actions[] = {

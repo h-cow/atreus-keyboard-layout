@@ -152,8 +152,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [_ITERM] = LAYOUT(
-    KC_TRNS, LGUI(KC_W), KC_TRNS, KC_TRNS, LGUI(KC_PGUP),                                       LGUI(KC_T), LGUI(LSFT(KC_D)), LGUI(KC_D), LGUI(KC_T), LCTL(LSFT(KC_TAB)),
-    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, LGUI(KC_PGDN),                                       LGUI(LSFT(KC_H)), LGUI(LSFT(KC_J)), LGUI(LSFT(KC_K)), LGUI(LSFT(KC_L)), LCTL(KC_TAB),
+    KC_TRNS, LGUI(KC_W), KC_TRNS, KC_TRNS, LGUI(KC_PGUP),                                       LGUI(KC_T), LGUI(LSFT(KC_D)), LGUI(KC_D), LGUI(KC_T), LCTL(KC_TAB),
+    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, LGUI(KC_PGDN),                                       LGUI(LSFT(KC_H)), LGUI(LSFT(KC_J)), LGUI(LSFT(KC_K)), LGUI(LSFT(KC_L)), LCTL(LSFT(KC_TAB)),
     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                                       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,         KC_TRNS, KC_TRNS,             KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
   )

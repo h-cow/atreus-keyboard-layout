@@ -17,6 +17,7 @@
 #define _CHROME 11
 #define _TMUX 12
 #define _ITERM 13
+#define _DESKTOP 14
 
 enum custom_keycodes {
     MY_CUSTOM = SAFE_RANGE,
@@ -93,14 +94,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_MAIN_MAC] = LAYOUT( /* Qwerty */
     KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                      KC_Y,    KC_U,    KC_I,    KC_O,    KC_P    ,
     KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                      KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN ,
-    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                      KC_N,    KC_M,    KC_COMM, KC_DOT,  LT(_VSCODE, KC_SLSH) ,
+    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                      KC_N,    KC_M,    KC_COMM, LT(_DESKTOP, KC_DOT),  LT(_VSCODE, KC_SLSH) ,
     LT(_CHROME, KC_ESC), KC_TAB, KC_LGUI,  KC_LSFT, MT(MOD_LGUI, KC_BSPC),      KC_LALT, KC_LCTL,    KC_SPC,  MO(_RS), KC_MINS, KC_QUOT, LT(_ITERM, KC_ENT)
   ),
 
   [_MAIN_LINUX] = LAYOUT( /* Qwerty */
     KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                      KC_Y,    KC_U,    KC_I,    KC_O,    KC_P    ,
     KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                      KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN ,
-    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                      KC_N,    KC_M,    KC_COMM, KC_DOT,  LT(_VSCODE, KC_SLSH) ,
+    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                      KC_N,    KC_M,    KC_COMM, LT(_DESKTOP, KC_DOT),  LT(_VSCODE, KC_SLSH) ,
     KC_ESC, KC_TAB, KC_LGUI,  KC_LSFT, MT(MOD_LCTL, KC_BSPC),      KC_TRNS, KC_TRNS,    KC_SPC,  MO(_RS), KC_MINS, KC_QUOT, LT(_TMUX, KC_ENT)
   ),
 
@@ -156,6 +157,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, LGUI(KC_PGDN),                                       LGUI(LSFT(KC_H)), LGUI(LSFT(KC_J)), LGUI(LSFT(KC_K)), LGUI(LSFT(KC_L)), LCTL(LSFT(KC_TAB)),
     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                                       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,         KC_TRNS, KC_TRNS,             KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
+  ),
+
+  [_DESKTOP] = LAYOUT(
+    LGUI(KC_1), LGUI(KC_2), LGUI(KC_3), LGUI(KC_4), LGUI(KC_5),        LGUI(KC_6), LGUI(KC_7), LGUI(KC_8), LGUI(KC_9), LGUI(KC_0),
+    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                         KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                         KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,   KC_TRNS, KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
   )
 
 };

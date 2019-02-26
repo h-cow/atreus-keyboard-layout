@@ -34,7 +34,10 @@ enum custom_keycodes {
     LINUX_AS_DEFAULT,
     MAC_AS_DEFAULT,
     TMUX_RENAME_TAB,
-    TMUX_SCROLL
+    TMUX_SCROLL,
+    TMUX_ZOOM,
+    TMUX_BREAK_PANE,
+    TMUX_CHOOSE_TREE
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -79,6 +82,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       case TMUX_SCROLL:
         SEND_STRING(SS_LCTRL("b")"[");
         return false;
+      case TMUX_ZOOM:
+        SEND_STRING(SS_LCTRL("b")"z");
+        return false;
+      case TMUX_CHOOSE_TREE:
+        SEND_STRING(SS_LCTRL("b")"t");
+        return false;
+      case TMUX_BREAK_PANE:
+        SEND_STRING(SS_LCTRL("b")"b");
+        return false;
       case LINUX_AS_DEFAULT:
         set_single_persistent_default_layer(_MAIN_LINUX);
         return false;
@@ -95,7 +107,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                      KC_Y,    KC_U,    KC_I,    KC_O,    KC_P    ,
     KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                      KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN ,
     KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                      KC_N,    KC_M,    KC_COMM, LT(_DESKTOP, KC_DOT),  LT(_VSCODE, KC_SLSH) ,
-    LT(_CHROME, KC_ESC), KC_TAB, KC_LGUI,  KC_LSFT, MT(MOD_LGUI, KC_BSPC),      KC_LALT, KC_LCTL,    KC_SPC,  MO(_RS), KC_MINS, KC_QUOT, LT(_ITERM, KC_ENT)
+    LT(_CHROME, KC_ESC), KC_TAB, KC_LGUI,  KC_LSFT, MT(MOD_LGUI, KC_BSPC),      KC_LCTL, KC_LALT,    KC_SPC,  MO(_RS), KC_MINS, KC_QUOT, LT(_TMUX, KC_ENT)
   ),
 
   [_MAIN_LINUX] = LAYOUT( /* Qwerty */
@@ -139,9 +151,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [_TMUX] = LAYOUT(
-    KC_Q,    TMUX_CLOSE_WINDOW,    KC_E,    TMUX_RENAME_TAB,    KC_T,                            TMUX_NEW_TAB,    TMUX_SPLIT_HORIZONTAL,    TMUX_SPLIT_VERTICAL,    TMUX_NEW_TAB,    TMUX_NEXT_WINDOW    ,
+    KC_Q,    TMUX_CLOSE_WINDOW,    KC_E,    TMUX_RENAME_TAB,    TMUX_CHOOSE_TREE,                            TMUX_NEW_TAB,    TMUX_SPLIT_HORIZONTAL,    TMUX_SPLIT_VERTICAL,    TMUX_NEW_TAB,    TMUX_NEXT_WINDOW    ,
     KC_A,    TMUX_SCROLL,    LGUI(LSFT(KC_TAB)),    LGUI(KC_TAB),    KC_G,                      TMUX_MOVE_LEFT,    TMUX_MOVE_DOWN,    TMUX_MOVE_UP,    TMUX_MOVE_RIGHT,    TMUX_PREVIOUS_WINDOW ,
-    KC_Z,    KC_X,    KC_C,    KC_V,    KC_NO,                      KC_N,    KC_M,    KC_COMM, KC_NO,  KC_NO ,
+    KC_Z,    KC_X,    KC_C,    KC_V,    TMUX_BREAK_PANE,                      TMUX_ZOOM,    LCTL(KC_LEFT),    LCTL(KC_DOWN), LCTL(KC_UP),  LCTL(KC_RIGHT) ,
     KC_TRNS, KC_NO, KC_NO,  KC_NO, KC_NO,         KC_NO, KC_NO,              KC_NO,  KC_NO, KC_NO, KC_NO, KC_NO
   ),
 

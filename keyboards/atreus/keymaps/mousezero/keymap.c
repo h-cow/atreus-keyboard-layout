@@ -37,7 +37,8 @@ enum custom_keycodes {
     TMUX_SCROLL,
     TMUX_ZOOM,
     TMUX_BREAK_PANE,
-    TMUX_CHOOSE_TREE
+    TMUX_CHOOSE_TREE,
+    TMUX_SWITCH_SESSION
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -84,6 +85,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         return false;
       case TMUX_ZOOM:
         SEND_STRING(SS_LCTRL("b")"z");
+        return false;
+      case TMUX_SWITCH_SESSION:
+        SEND_STRING(SS_LCTRL("b")"s");
         return false;
       case TMUX_CHOOSE_TREE:
         SEND_STRING(SS_LCTRL("b")"t");
@@ -133,7 +137,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     LGUI(LALT(LSFT(KC_1))), LGUI(LSFT(KC_E)), LGUI(LSFT(KC_E)), LGUI(LALT(KC_F)), LGUI(LCTL(LSFT(KC_R))), KC_TRNS, KC_TRNS, KC_TRNS, LGUI(LSFT(KC_P)), LGUI(KC_P),
     LGUI(LALT(KC_K)), LGUI(LSFT(KC_F)), KC_TRNS, LGUI(KC_F), LGUI(LCTL(LSFT(KC_F))), LCTL(LSFT(KC_TAB)), KC_TRNS, KC_TRNS, LCTL(KC_TAB), KC_TRNS,
     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, LGUI(LALT(KC_B)), KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-    TO(_MAIN_MAC), KC_TRNS, KC_TRNS, KC_TRNS, KC_LCTL, KC_TRNS, KC_TRNS, KC_TAB, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
+    TO(_MAIN_MAC), KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TAB, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
   ),
 
   [_SHORTCUT_SWITCHER] = LAYOUT(
@@ -152,8 +156,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_TMUX] = LAYOUT(
     KC_Q,    TMUX_CLOSE_WINDOW,    KC_E,    TMUX_RENAME_TAB,    TMUX_CHOOSE_TREE,                            TMUX_NEW_TAB,    TMUX_SPLIT_HORIZONTAL,    TMUX_SPLIT_VERTICAL,    TMUX_NEW_TAB,    TMUX_NEXT_WINDOW    ,
-    KC_A,    TMUX_SCROLL,    LGUI(LSFT(KC_TAB)),    LGUI(KC_TAB),    KC_G,                      TMUX_MOVE_LEFT,    TMUX_MOVE_DOWN,    TMUX_MOVE_UP,    TMUX_MOVE_RIGHT,    TMUX_PREVIOUS_WINDOW ,
-    KC_Z,    KC_X,    KC_C,    KC_V,    TMUX_BREAK_PANE,                      TMUX_ZOOM,    LCTL(KC_LEFT),    LCTL(KC_DOWN), LCTL(KC_UP),  LCTL(KC_RIGHT) ,
+    TMUX_SCROLL, TMUX_SWITCH_SESSION, LGUI(LSFT(KC_TAB)),    LGUI(KC_TAB),    KC_G,                      TMUX_MOVE_LEFT,    TMUX_MOVE_DOWN,    TMUX_MOVE_UP,    TMUX_MOVE_RIGHT,    TMUX_PREVIOUS_WINDOW ,
+    TMUX_ZOOM,    KC_X,    KC_C,    KC_V,    TMUX_BREAK_PANE,                      KC_TRNS,    LCTL(KC_LEFT),    LCTL(KC_DOWN), LCTL(KC_UP),  LCTL(KC_RIGHT) ,
     KC_TRNS, KC_NO, KC_NO,  KC_NO, KC_NO,         KC_NO, KC_NO,              KC_NO,  KC_NO, KC_NO, KC_NO, KC_NO
   ),
 

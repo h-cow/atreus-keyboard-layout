@@ -11,6 +11,7 @@
 #define _MAIN_LINUX 1
 #define _RS 3
 #define _LW 4
+#define _MOUSE 6
 #define _VSCODE 8
 #define _SHORTCUT_SWITCHER 9
 #define _L_CHROME 10
@@ -48,52 +49,52 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         SEND_STRING("QMK is the best thing ever!");
         return false;
       case TMUX_NEW_TAB:
-        SEND_STRING(SS_LCTRL("b")"c");
+        SEND_STRING(SS_LCTRL("s")"c");
         return false;
       case TMUX_MOVE_UP:
-        SEND_STRING(SS_LCTRL("b")SS_TAP(X_UP));
+        SEND_STRING(SS_LCTRL("s")SS_TAP(X_UP));
         return false;
       case TMUX_MOVE_DOWN:
-        SEND_STRING(SS_LCTRL("b")SS_TAP(X_DOWN));
+        SEND_STRING(SS_LCTRL("s")SS_TAP(X_DOWN));
         return false;
       case TMUX_MOVE_RIGHT:
-        SEND_STRING(SS_LCTRL("b")SS_TAP(X_RIGHT));
+        SEND_STRING(SS_LCTRL("s")SS_TAP(X_RIGHT));
         return false;
       case TMUX_MOVE_LEFT:
-        SEND_STRING(SS_LCTRL("b")SS_TAP(X_LEFT));
+        SEND_STRING(SS_LCTRL("s")SS_TAP(X_LEFT));
         return false;
       case TMUX_SPLIT_HORIZONTAL:
-        SEND_STRING(SS_LCTRL("b")"\"");
+        SEND_STRING(SS_LCTRL("s")"\"");
         return false;
       case TMUX_SPLIT_VERTICAL:
-        SEND_STRING(SS_LCTRL("b")SS_LSFT("5"));
+        SEND_STRING(SS_LCTRL("s")SS_LSFT("5"));
         return false;
       case TMUX_NEXT_WINDOW:
-        SEND_STRING(SS_LCTRL("b")"n");
+        SEND_STRING(SS_LCTRL("s")"n");
         return false;
       case TMUX_PREVIOUS_WINDOW:
-        SEND_STRING(SS_LCTRL("b")"p");
+        SEND_STRING(SS_LCTRL("s")"p");
         return false;
       case TMUX_CLOSE_WINDOW:
-        SEND_STRING(SS_LCTRL("b")"x""y");
+        SEND_STRING(SS_LCTRL("s")"x""y");
         return false;
       case TMUX_RENAME_TAB:
-        SEND_STRING(SS_LCTRL("b")","SS_LCTRL("u"));
+        SEND_STRING(SS_LCTRL("s")","SS_LCTRL("u"));
         return false;
       case TMUX_SCROLL:
-        SEND_STRING(SS_LCTRL("b")"[");
+        SEND_STRING(SS_LCTRL("s")"[");
         return false;
       case TMUX_ZOOM:
-        SEND_STRING(SS_LCTRL("b")"z");
+        SEND_STRING(SS_LCTRL("s")"z");
         return false;
       case TMUX_SWITCH_SESSION:
-        SEND_STRING(SS_LCTRL("b")"s");
+        SEND_STRING(SS_LCTRL("s")"s");
         return false;
       case TMUX_CHOOSE_TREE:
-        SEND_STRING(SS_LCTRL("b")"t");
+        SEND_STRING(SS_LCTRL("s")"t");
         return false;
       case TMUX_BREAK_PANE:
-        SEND_STRING(SS_LCTRL("b")"b");
+        SEND_STRING(SS_LCTRL("s")"b");
         return false;
       case LINUX_AS_DEFAULT:
         set_single_persistent_default_layer(_MAIN_LINUX);
@@ -110,15 +111,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_MAIN_MAC] = LAYOUT( /* Qwerty */
     KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                      KC_Y,    KC_U,    KC_I,    KC_O,    KC_P    ,
     KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                      KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN ,
-    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                      KC_N,    KC_M,    KC_COMM, LT(_DESKTOP, KC_DOT),  LT(_VSCODE, KC_SLSH) ,
-    LT(_CHROME, KC_ESC), KC_TAB, KC_LGUI,  KC_LSFT, MT(MOD_LGUI, KC_BSPC),     KC_LALT, KC_LCTL,     KC_SPC,  MO(_RS), KC_MINS, KC_QUOT, LT(_TMUX, KC_ENT)
+    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                      KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH ,
+    LT(_MOUSE, KC_ESC), KC_TAB, KC_LGUI,  KC_LSFT, MT(MOD_LGUI, KC_BSPC),    KC_LCTL, KC_LALT,      KC_SPC,  MO(_RS), KC_MINS, KC_QUOT, KC_ENT
   ),
 
   [_MAIN_LINUX] = LAYOUT( /* Qwerty */
     KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                      KC_Y,    KC_U,    KC_I,    KC_O,    KC_P    ,
     KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                      KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN ,
     KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                      KC_N,    KC_M,    KC_COMM, LT(_DESKTOP, KC_DOT),  LT(_VSCODE, KC_SLSH) ,
-    KC_ESC, KC_TAB, KC_LGUI,  KC_LSFT, MT(MOD_LCTL, KC_BSPC),      KC_TRNS, KC_TRNS,    KC_SPC,  MO(_RS), KC_MINS, KC_QUOT, LT(_TMUX, KC_ENT)
+    LT(_MOUSE, KC_ESC), KC_TAB, KC_LGUI,  KC_LSFT, MT(MOD_LCTL, KC_BSPC),      KC_TRNS, KC_TRNS,    KC_SPC,  MO(_RS), KC_MINS, KC_QUOT, LT(_TMUX, KC_ENT)
   ),
 
   [_RS] = LAYOUT( /* [> RAISE <] */
@@ -180,7 +181,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                         KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                         KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,   KC_TRNS, KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
+  ),
+
+  [_MOUSE] = LAYOUT(
+    KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,                         KC_NO, KC_NO, KC_WH_R, KC_WH_L, KC_WH_D,
+    KC_NO, KC_NO, KC_BTN2, KC_BTN1, KC_NO,                         KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, KC_WH_U,
+    KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,                         KC_NO, KC_WH_L, KC_NO, KC_WH_R, KC_NO,
+    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,     KC_TRNS, KC_ACL1,   KC_ACL0, KC_ACL2, KC_TRNS, KC_TRNS, KC_TRNS
   )
+
 
 };
 

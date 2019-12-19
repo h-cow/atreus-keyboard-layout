@@ -12,7 +12,7 @@
 #define _RS 3
 #define _LW 4
 #define _MOUSE 6
-#define _VSCODE 8
+#define _MULTI_TOOL 8
 #define _SHORTCUT_SWITCHER 9
 #define _L_CHROME 10
 #define _CHROME 11
@@ -110,9 +110,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_MAIN_MAC] = LAYOUT( /* Qwerty */
     KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                      KC_Y,    KC_U,    KC_I,    KC_O,    KC_P    ,
-    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                      KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN ,
+    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                      KC_H,    KC_J,    KC_K,    KC_L,    LT(_MULTI_TOOL, KC_SCLN),
     KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                      KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH ,
-    LT(_MOUSE, KC_ESC), KC_TAB, KC_LALT,  KC_LSFT, MT(MOD_LCTL, KC_BSPC),   KC_LGUI, KC_LCTL,       KC_SPC,  MO(_RS), KC_MINS, KC_QUOT, KC_ENT
+    KC_ESC, KC_TAB, MO(_MOUSE),  KC_LSFT, MT(MOD_LGUI, KC_BSPC),   KC_LCTL, KC_LALT,       KC_SPC,  MO(_RS), KC_MINS, KC_QUOT, KC_ENT
   ),
 
   [_MAIN_LINUX] = LAYOUT( /* Qwerty */
@@ -134,11 +134,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_NO,   KC_VOLU, KC_NO,   KC_NO,   RESET,                     KC_NO,   KC_F1,   KC_F2,   KC_F3,   KC_F12  ,
     TO(_MAIN_MAC),   KC_VOLD, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,  TO(_MAIN_MAC), KC_PSCR, KC_SLCK, KC_PAUS ),
 
-  [_VSCODE] = LAYOUT(
-    LGUI(LALT(LSFT(KC_1))), LGUI(LSFT(KC_E)), LGUI(LSFT(KC_E)), LGUI(LALT(KC_F)), LGUI(LCTL(LSFT(KC_R))), KC_TRNS, KC_TRNS, KC_TRNS, LGUI(LSFT(KC_P)), LGUI(KC_P),
-    LGUI(LALT(KC_K)), LGUI(LSFT(KC_F)), KC_TRNS, LGUI(KC_F), LGUI(LCTL(LSFT(KC_F))), LCTL(LSFT(KC_TAB)), KC_TRNS, KC_TRNS, LCTL(KC_TAB), KC_TRNS,
-    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, LGUI(LALT(KC_B)), KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-    TO(_MAIN_MAC), KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TAB, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
+  [_MULTI_TOOL] = LAYOUT(
+    KC_NO, KC_NO, LGUI(LSFT(KC_E)), LGUI(LSFT(KC_R)), LGUI(LSFT(KC_T)),                         KC_NO, KC_NO, LALT(LGUI(KC_I)), KC_NO, LGUI(LSFT(KC_O)),
+    LGUI(LSFT(KC_A)), LGUI(LSFT(LALT(KC_S))), KC_NO, LGUI(LSFT(KC_F)), LGUI(LSFT(KC_G)),                         KC_NO, KC_NO, KC_NO, KC_NO, KC_TRNS,
+    KC_NO, KC_NO, LGUI(LSFT(LALT(KC_C))), LGUI(LSFT(KC_V)), LGUI(LSFT(KC_B)),                         KC_NO, LGUI(LSFT(KC_M)), KC_NO, KC_NO, KC_NO,
+    LCTL(KC_TAB), LCTL(LSFT(KC_TAB)), KC_NO, KC_NO, KC_NO,   KC_NO, KC_NO,    KC_NO, KC_NO, KC_NO, KC_NO, KC_NO
   ),
 
   [_SHORTCUT_SWITCHER] = LAYOUT(
@@ -184,10 +184,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [_MOUSE] = LAYOUT(
-    KC_NO, KC_NO, KC_NO, KC_NO, KC_ACL2,                         KC_NO, KC_NO, KC_WH_R, KC_WH_L, KC_WH_D,
-    KC_NO, KC_NO, KC_NO, KC_NO, KC_ACL1,                         KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, KC_WH_U,
-    KC_NO, KC_NO, KC_NO, KC_NO, KC_ACL0,                         KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
-    KC_NO, KC_NO, KC_NO, KC_NO, LGUI(KC_BTN1),     KC_BTN2, KC_BTN1,   LCTL(KC_BTN1), LCTL(KC_BTN2), KC_NO, KC_NO, KC_NO
+    KC_NO, KC_WH_L, KC_MS_U, KC_WH_R, KC_WH_U,                         KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
+    KC_NO, KC_MS_L, KC_MS_D, KC_MS_R, KC_WH_D,                         MOD_LCTL, MOD_LGUI, KC_NO, KC_NO, KC_TRNS,
+    KC_NO, KC_NO, LGUI(KC_C), LGUI(KC_V), KC_ACL0,                         KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
+    KC_ESC, KC_NO, KC_NO, KC_NO, KC_NO,     LCTL(KC_C), LCTL(KC_V),   KC_BTN1, KC_BTN2, KC_BTN3, KC_NO, KC_NO
   )
 
 

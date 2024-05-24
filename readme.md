@@ -1,4 +1,15 @@
 # MouseZero Config
+## New Way of updating keyboard
+- Download the `atreus.json`
+- Configure changes on [QMK Configurator](https://config.qmk.fm/#/atreus/astar/LAYOUT)
+     - upload the `atreus.json`
+- Compile
+- Download Firmware
+- Use QMK Toolbox on your computer to flash the keyboard
+     - Select the file you downloaded
+     - Check `Auto Flash`
+     - Prest the reset key on the keyboard
+## Old way of updating keyboard
 Keyboard is using the avrdude bootloader. The PCB is backwards so you need to enable `PCBDOWN=yes` but not that the 2 middle keys are still fliped in the config. I found that I was not able to update my Atreus on my Mac or Ubuntu machines it only worked on the Raspberry Pi.
 
 ```bash
